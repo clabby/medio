@@ -1,0 +1,273 @@
+@import "desktop";
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: #000;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/MaterialIcons-Regular.woff2') format('woff2');
+}
+
+.icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  opacity: 0.85;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.icon.disabled {
+  opacity: 0.3;
+}
+
+body.mouse-idle {
+  cursor: none;
+
+  .controls, .header {
+    opacity: 0 !important;
+  }
+}
+
+button {
+  color: #fff !important;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.icon:not(.disabled):hover {
+  opacity: 1;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  &:hover, &:focus {
+    .header, .controls {
+      opacity: 1;
+    }
+  }
+}
+
+.header {
+  background: rgb(40, 40, 40);
+  border-bottom: 1px solid rgb(30, 30, 30);
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  color: #f8f8f8;
+  height: 38px;
+  z-index: 100;
+
+  -webkit-app-region: drag;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  -webkit-transition: opacity 0.1s ease-in;
+  -moz-transition: opacity 0.1s ease-in;
+  -o-transition: opacity 0.1s ease-in;
+  -ms-transition: opacity 0.1s ease-in;
+  transition: opacity 0.1s ease-in;
+
+  span.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    & > span {
+      max-width: 40%;
+    }
+  }
+}
+
+.repeating {
+  color: #f8f8f8;
+}
+
+.controls {
+  background: rgb(40, 40, 40);
+  border-top: 1px solid rgb(30, 30, 30);
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #787c7f;
+  height: 50px;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: row;
+
+  .controls-timeline {
+    position: absolute;
+    background-color: #787c7f;
+    height: 10px;
+    width: 100%;
+    bottom: 50px;
+
+    .controls-timeline-progress {
+      background-color: #5793db;
+      height: 100%;
+      transition: width 0.25s linear;
+    }
+  }
+
+  -webkit-transition: opacity 0.1s ease-in;
+  -moz-transition: opacity 0.1s ease-in;
+  -o-transition: opacity 0.1s ease-in;
+  -ms-transition: opacity 0.1s ease-in;
+  transition: opacity 0.1s ease-in;
+
+  i {
+    font-size: 24px;
+    margin-left: 10px;
+
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+
+  i:first-child {
+    margin-left: 0;
+  }
+
+  .controls-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 15px;
+    height: 100%;
+  }
+
+  .controls-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 15px;
+    align-items: center;
+  }
+
+  .volume-slider {
+    -webkit-appearance: none;
+    -webkit-app-region: no-drag;
+    width: 60px;
+    height: 3px;
+    border: none;
+    padding: 0;
+    opacity: 0.85;
+    margin-left: 10px;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      -webkit-app-region: no-drag;
+      background-color: #2196F3;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+}
+
+.media {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.playlist-modal {
+  position: relative;
+
+  .close {
+    position: absolute;
+    top: 25px;
+    right: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  h3 {
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+  }
+
+  center > i {
+    font-size: 24px;
+  }
+
+  button span {
+    color: #fff !important;
+  }
+
+  .playlist-entry.selected {
+    background-color: lighten(#000, 35%) !important;
+  }
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

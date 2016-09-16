@@ -1,0 +1,23 @@
+body {
+  -webkit-user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+input:focus,
+button:focus {
+  outline: none !important;
+}
