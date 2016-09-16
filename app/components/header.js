@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { dispatcher } from '../lib/dispatcher';
 import util from '../lib/util';
 
 module.exports = class Header extends React.Component {
   render () {
-    const loc = this.props.state.location;
-
     return (
       <div className='header'>
         {this.getTitle()}
@@ -16,6 +13,7 @@ module.exports = class Header extends React.Component {
 
   getTitle () {
     const state = this.props.state;
+
     if (state.playlist.selected) {
       return (
         <span className='title'>
@@ -31,4 +29,4 @@ module.exports = class Header extends React.Component {
       )
     }
   }
-}
+};

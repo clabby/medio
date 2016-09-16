@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-const State = module.exports = Object.assign(new EventEmitter(), {
+module.exports = Object.assign(new EventEmitter(), {
   getDefaultState
 });
 

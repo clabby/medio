@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './containers/App';
-import WebTorrent from 'webtorrent';
-import crypto from 'crypto';
 import dragDrop from 'drag-drop'
 
 const mdns = require('multicast-dns')();
@@ -46,16 +44,16 @@ document.addEventListener('keydown', function (e) {
 }, false);
 
 dragDrop('body', function (files) {
-  var paths = _.map(files, function (file) {
+  let paths = _.map(files, function (file) {
     return file.path;
   });
   dispatch('addToPlaylist', paths);
 });
 
-var idleMouseTimer;
-var forceMouseHide = false;
+let idleMouseTimer;
+let forceMouseHide = false;
 
-document.addEventListener('mousemove', function(ev) {
+document.addEventListener('mousemove', function() {
   if(!forceMouseHide) {
     document.querySelector('body').className = '';
 
@@ -111,7 +109,7 @@ const dispatchHandlers = {
     state.modal = null;
   },
   'openFileSelect': () => {
-    var files = dialog.showOpenDialog({ properties: [ 'openFile', 'multiSelections' ]});
+    let files = dialog.showOpenDialog({ properties: [ 'openFile', 'multiSelections' ]});
     if (files) {
       dispatch('addToPlaylist', files);
     }
@@ -144,12 +142,11 @@ const dispatchHandlers = {
   },
   'select': (selected) => {
     state.playlist.selected = selected;
-    var link = 'http://127.0.0.1:' + server.address().port + '/' + selected.id;
-    state.playlist.selectedLink = link;
+    state.playlist.selectedLink = 'http://127.0.0.1:' + server.address().port + '/' + selected.id;
     state.playing = true;
   },
   'selectNext': () => {
-    var index = state.playlist.entries.indexOf(state.playlist.selected);
+    let index = state.playlist.entries.indexOf(state.playlist.selected);
     if (index + 1 >= state.playlist.entries.length) {
       index = -1;
     }
@@ -175,7 +172,7 @@ remote.getCurrentWindow().on('leave-full-screen', function () {
 }, false); */
 
 window.addEventListener('contextmenu', (e) => {
-  var menu = new Menu();
+  let menu = new Menu();
 
   menu.append(new MenuItem({
     label: 'Paste Link',
@@ -218,15 +215,15 @@ function createVideoServer () {
         return res.end();
       }
 
-      var stringify = JSONStream.stringify();
+      let stringify = JSONStream.stringify();
 
       stringify.pipe(res);
       stringify.write({type: 'open', url: 'http://' + network() + ':' + server.address().port + '/' + state.playlist.selected.id, time: state.time});
       return;
     }
 
-    var id = req.url.slice(1);
-    var file = _.find(state.playlist.entries, {id: id});
+    let id = req.url.slice(1);
+    let file = _.find(state.playlist.entries, {id: id});
 
     if (!file) {
       res.statusCode = 404;
@@ -234,7 +231,7 @@ function createVideoServer () {
       return;
     }
 
-    var range = req.headers.range && rangeParser(file.length, req.headers.range)[0];
+    let range = req.headers.range && rangeParser(file.length, req.headers.range)[0];
 
     res.setHeader('Accept-Ranges', 'bytes');
     res.setHeader('Content-Type', 'video/mp4');
@@ -260,7 +257,7 @@ function createVideoServer () {
     console.log('Medio server running on port ' + server.address().port);
 
     mdns.on('query', (query) => {
-      var valid = query.questions.some((q) => {
+      let valid = query.questions.some((q) => {
         return q.name === 'medio';
       });
 

@@ -28,8 +28,6 @@ const Modals = {
 export default class App extends Component {
 
   render() {
-    const state = this.props.state;
-
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div className='app'>

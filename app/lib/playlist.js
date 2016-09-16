@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import crypto from 'crypto';
 import torrents from 'webtorrent';
-import concat from 'concat-stream';
 import fs from 'fs';
 import ytdl from 'ytdl-core';
 import duplex from 'duplexify';
@@ -230,4 +229,4 @@ function add (link, cb) {
   } else {
     addFunctions.onFile(link, cb);
   }
-};
+}

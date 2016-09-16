@@ -1,15 +1,14 @@
 import React from 'react';
 
 import { dispatch } from '../lib/dispatcher';
-import { Dialog, RaisedButton, List, ListItem } from 'material-ui';
-import Trash from 'material-ui/svg-icons/action/delete';
+import { Dialog, RaisedButton, ListItem } from 'material-ui';
 
 import _ from 'lodash';
 
 module.exports = class PlaylistModal extends React.Component {
   getPlaylistItems () {
     const state = this.props.state;
-    var entries = [];
+    let entries = [];
 
     if (state.playlist.entries.length < 1) {
       entries.push(
@@ -29,8 +28,6 @@ module.exports = class PlaylistModal extends React.Component {
   }
 
   render () {
-    const state = this.props.state;
-
     const actions = [
       (
         <RaisedButton
@@ -40,7 +37,7 @@ module.exports = class PlaylistModal extends React.Component {
           style={{display: 'block'}}
         />
       )
-    ]
+    ];
 
     return (
       <Dialog

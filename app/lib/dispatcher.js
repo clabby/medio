@@ -2,10 +2,10 @@ module.exports = {
   dispatch,
   dispatcher,
   setDispatch
-}
+};
 
-const dispatchers = {}
-let _dispatch = function () {}
+const dispatchers = {};
+let _dispatch = function () {};
 
 function setDispatch (dispatch) {
   _dispatch = dispatch;

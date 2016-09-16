@@ -13,7 +13,7 @@ function formatTime (secs) {
 };
 
 function getTorrentProgressSummary (torrent) {
-  const fileProg = torrent.files && torrent.files.map(function (file, index) {
+  const fileProg = torrent.files && torrent.files.map(function (file) {
     const totalPieces = file._endPiece - file._startPiece + 1;
     let totalPiecesPresent = 0;
     for (let piece = file._startPiece; piece <= file._endPiece; piece++) {

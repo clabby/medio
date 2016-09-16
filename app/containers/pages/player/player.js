@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import { dispatch, dispatcher } from '../../../lib/dispatcher';
 import util from '../../../lib/util';
 
-import { Slider, CircularProgress } from 'material-ui';
+import { CircularProgress } from 'material-ui';
 import Tooltip from 'react-tooltip';
-import PlaylistModal from '../../../components/playlist-modal';
 import Timeline from '../../../components/timeline';
-import ReactVideo from 'react.video';
 
 export default class Player extends Component {
   constructor (props) {

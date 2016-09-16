@@ -10,18 +10,18 @@ export default class Tooltip extends Component {
     style: PropTypes.object,
     touch: PropTypes.bool,
     verticalPosition: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     horizontalPosition: 'center',
     touch: true,
     verticalPosition: 'bottom'
-  }
+  };
 
   constructor (props) {
-    super(props)
+    super(props);
 
-    this.state = { showTooltip: false }
+    this.state = { showTooltip: false };
 
     this.handleBlur = ::this.handleBlur
     this.handleFocus = ::this.handleFocus
