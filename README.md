@@ -2,11 +2,20 @@
 
 A media player written in [NodeJS](https://nodejs.org/en/) based off of [electron](http://electron.atom.io/) and [react](https://facebook.github.io/react/).
 
-## Notes
-* This project was to learn react and electron. Don't expect this to be production-worthy at all.
+***
+
+**NOTE:** This project was for me (@clabby) to learn electron and react. Don't expect this app to be production-ready.
+
+***
 
 ## Contributing
-To contribute, clone the repository and run `npm install && npm run dev`
+If you'd like to contribute, just clone the repository and hack away! I don't really mind the format of your pull request as long as it is clean and explains the feature that you've added clearly.
+
+## Development
+
+1. Clone the repo: `git clone https://github.com/clabby/medio`
+2. Run `npm install`
+3. Start the dev server: `npm run dev`
 
 ## Screenshots
 ![screenshot-1](screenshots/ss1.png)
