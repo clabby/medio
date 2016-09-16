@@ -139,14 +139,23 @@ button {
   .controls-timeline {
     position: absolute;
     background-color: #787c7f;
-    height: 10px;
+    height: 5px;
     width: 100%;
     bottom: 50px;
+
+    .controls-timeline-part {
+      background-color: darken(#787c7f, 10%);
+      height: 100%;
+      transition: width 0.25s linear;
+      position: absolute;
+    }
 
     .controls-timeline-progress {
       background-color: #5793db;
       height: 100%;
       transition: width 0.25s linear;
+      position: absolute;
+      z-index: 101;
     }
   }
 

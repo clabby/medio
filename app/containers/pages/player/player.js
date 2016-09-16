@@ -23,7 +23,6 @@ export default class Player extends Component {
       this.video.volume = state.volume;
 
       this.video.onwaiting = () => {
-        console.log('test');
         dispatch('setLoading', true);
       };
       this.video.onplaying = () => {

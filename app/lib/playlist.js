@@ -30,11 +30,13 @@ var addFunctions = {
     }, (torrent) => {
       console.log('Torrent ready. Playlist ID: ' + id);
 
-      torrent.files.forEach((f) => {
+      torrent.files.forEach((f, index) => {
         f.downloadSpeed = torrent.downloadSpeed;
         if (/\.(mp4|mkv|mp3)$/i.test(f.name)) {
           f.select();
           f.id = id;
+          f.torrent = torrent;
+          f.torrentFileIndex = index;
 
           cb(null, f);
         }

@@ -1,5 +1,6 @@
 module.exports = {
-  formatTime
+  formatTime,
+  getTorrentProgressSummary
 };
 
 function formatTime (secs) {
@@ -10,3 +11,27 @@ function formatTime (secs) {
   if (secs < 10) secs = '0' + secs;
   return (hours ? hours + ':' : '') + mins + ':' + secs;
 };
+
+function getTorrentProgressSummary (torrent) {
+  const fileProg = torrent.files && torrent.files.map(function (file, index) {
+    const totalPieces = file._endPiece - file._startPiece + 1;
+    let totalPiecesPresent = 0;
+    for (let piece = file._startPiece; piece <= file._endPiece; piece++) {
+      if (torrent.bitfield.get(piece)) totalPiecesPresent++
+    }
+    return {
+      startPiece: file._startPiece,
+      endPiece: file._endPiece,
+      totalPieces,
+      totalPiecesPresent
+    }
+  });
+  return {
+    torrentKey: torrent.key,
+    ready: torrent.ready,
+    progress: torrent.progress,
+    length: torrent.length,
+    bitfield: torrent.bitfield,
+    files: fileProg
+  };
+}

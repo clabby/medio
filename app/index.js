@@ -120,7 +120,7 @@ const dispatchHandlers = {
     _.each(links, function (link) {
       Playlist.add(link, function (err, obj) {
         if (err) {
-          console.log(err);
+          return console.log(err);
         }
 
         state.playlist.entries.push(obj);
