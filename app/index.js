@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import App from './containers/App';
 import WebTorrent from 'webtorrent';
 import crypto from 'crypto';
+import dragDrop from 'drag-drop'
 
 const mdns = require('multicast-dns')();
 const http = require('http');
@@ -34,9 +35,6 @@ let state = window.state = State.getDefaultState();
 
 document.onpaste = function () {
   dispatch('addToPlaylist', clipboard.readText().split('\n'));
-  if (!state.modal) {
-    dispatch('setModal', 'playlist-modal');
-  }
 };
 
 document.addEventListener('keydown', function (e) {
@@ -46,6 +44,13 @@ document.addEventListener('keydown', function (e) {
     return dispatch('fullscreen');
   }
 }, false);
+
+dragDrop('body', function (files) {
+  var paths = _.map(files, function (file) {
+    return file.path;
+  });
+  dispatch('addToPlaylist', paths);
+});
 
 var idleMouseTimer;
 var forceMouseHide = false;
@@ -125,6 +130,10 @@ const dispatchHandlers = {
         }
       });
     });
+
+    if (!state.modal) {
+      dispatch('setModal', 'playlist-modal');
+    }
   },
   'deleteFromPlaylist': (id) => {
     if (state.playlist.selected.id === id) {
@@ -169,12 +178,9 @@ window.addEventListener('contextmenu', (e) => {
   var menu = new Menu();
 
   menu.append(new MenuItem({
-    label: 'Paste link',
+    label: 'Paste Link',
     click: () => {
       dispatch('addToPlaylist', clipboard.readText().split('\n'));
-      if (!state.modal) {
-        dispatch('setModal', 'playlist-modal');
-      }
     }
   }));
 

@@ -98,6 +98,7 @@
     "css-loader": "^0.25.0",
     "css-modules-require-hook": "^4.0.2",
     "defaultcss": "^1.1.1",
+    "drag-drop": "^2.12.1",
     "duplexify": "^3.4.5",
     "electron-debug": "^1.0.1",
     "end-of-stream": "^1.1.0",
