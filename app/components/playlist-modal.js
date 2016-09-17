@@ -16,13 +16,15 @@ module.exports = class PlaylistModal extends React.Component {
           <ListItem primaryText={<i>Loading Torrent #{index + 1}...</i>} key={'loading-' + index} style={{textAlign: 'center'}}/>
         );
       });
-    } else if (state.playlist.entries.length < 1) {
+    }
+
+    if (state.playlist.entries.length < 1 && state.loadingTorrents < 1) {
       entries.push(
         <ListItem primaryText={'Playlist is empty!'} key='nothing' style={{textAlign: 'center'}} />
       );
     } else {
-      entries = _.map(state.playlist.entries, function (entry) {
-        return (
+      _.each(state.playlist.entries, function (entry) {
+        entries.push(
           <ListItem primaryText={entry.name} onClick={() => dispatch('select', entry)} key={entry.id} className={'playlist-entry ' + (state.playlist.selected.id === entry.id ? 'selected' : '')} rightIcon={<i className='icon' onClick={(e) => {
             e.stopPropagation();
             dispatch('deleteFromPlaylist', entry.id);

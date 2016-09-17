@@ -184,6 +184,8 @@ window.addEventListener('contextmenu', (e) => {
 
   menu.append(new MenuItem({
     label: 'Paste Link',
+    role: 'paste',
+    accelerator: 'CmdOrCtrl+V',
     click: () => {
       dispatch('addToPlaylist', clipboard.readText().split('\n'));
     }
