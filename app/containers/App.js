@@ -4,7 +4,6 @@ import Header from '../components/header';
 const colors = require('material-ui/styles/colors');
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -25,7 +24,7 @@ const Modals = {
   'playlist-modal': require('../components/playlist-modal')
 };
 
-export default class App extends Component {
+module.exports = class App extends Component {
 
   render() {
     return (
@@ -69,4 +68,4 @@ export default class App extends Component {
       <View state={state} />
     );
   }
-}
+};

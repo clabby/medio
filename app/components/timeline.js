@@ -6,13 +6,6 @@ import util from '../lib/util';
 import Tooltip from 'react-tooltip';
 
 module.exports = class Timeline extends React.Component {
-  constructor (props) {
-    super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleHover = this.handleHover.bind(this);
-  }
-
   handleClick (e) {
     const state = this.props.state;
 
@@ -24,8 +17,7 @@ module.exports = class Timeline extends React.Component {
   handleHover (e) {
     var tooltip = ReactDOM.findDOMNode(this.tooltip);
     var percentage = e.pageX / this.controlsTimeline.offsetWidth;
-    var time = util.formatTime(percentage * state.totalTime);
-    tooltip.innerHTML = time;
+    tooltip.innerHTML = util.formatTime(percentage * state.totalTime);
     tooltip.style.left = (e.pageX - tooltip.offsetWidth / 2) + 'px';
   }
 

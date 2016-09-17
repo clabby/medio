@@ -15,6 +15,7 @@ function getDefaultState () {
     totalTime: 0.0,
     loading: false,
     showVolumeSlider: false,
+    loadingTorrents: 0,
     playlist: {
       selected: null,
       selectedLink: null,

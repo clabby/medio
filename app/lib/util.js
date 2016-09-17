@@ -10,7 +10,7 @@ function formatTime (secs) {
   if (mins < 10) mins = '0' + mins;
   if (secs < 10) secs = '0' + secs;
   return (hours ? hours + ':' : '') + mins + ':' + secs;
-};
+}
 
 function getTorrentProgressSummary (torrent) {
   const fileProg = torrent.files && torrent.files.map(function (file) {

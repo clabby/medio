@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 
 import { dispatch, dispatcher } from '../../../lib/dispatcher';
-import util from '../../../lib/util';
 
 import { CircularProgress } from 'material-ui';
 import Tooltip from 'react-tooltip';
 import Timeline from '../../../components/timeline';
 
-export default class Player extends Component {
-  constructor (props) {
-    super(props);
-
-    this.timelineTask = null;
-  }
-
+module.exports = class Player extends Component {
   componentDidUpdate () {
     const state = this.props.state;
 
@@ -96,4 +89,4 @@ export default class Player extends Component {
       </div>
     );
   }
-}
+};

@@ -7,6 +7,8 @@ import duplex from 'duplexify';
 import request from 'request';
 import path from 'path';
 
+import { dispatch } from './dispatcher';
+
 module.exports = {
   add
 };
@@ -23,11 +25,13 @@ var addFunctions = {
   onMagnet: (link, cb) => {
     var engine = torrents();
     var id = generateId();
+    dispatch('addLoadingTorrent');
 
     engine.add(link, {
       announce: [ 'wss://tracker.webtorrent.io' ]
     }, (torrent) => {
       console.log('Torrent ready. Playlist ID: ' + id);
+      dispatch('subtractLoadingTorrent');
 
       torrent.files.forEach((f, index) => {
         f.downloadSpeed = torrent.downloadSpeed;

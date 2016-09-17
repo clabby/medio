@@ -10,7 +10,13 @@ module.exports = class PlaylistModal extends React.Component {
     const state = this.props.state;
     let entries = [];
 
-    if (state.playlist.entries.length < 1) {
+    if (state.loadingTorrents > 0) {
+      _.times(state.loadingTorrents, function (index) {
+        entries.push(
+          <ListItem primaryText={<i>Loading Torrent #{index + 1}...</i>} key={'loading-' + index} style={{textAlign: 'center'}}/>
+        );
+      });
+    } else if (state.playlist.entries.length < 1) {
       entries.push(
         <ListItem primaryText={'Playlist is empty!'} key='nothing' style={{textAlign: 'center'}} />
       );

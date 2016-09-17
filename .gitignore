@@ -37,3 +37,4 @@ main.js.map
 
 # Intellij
 .idea
+*.iml

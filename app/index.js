@@ -6,7 +6,6 @@ import dragDrop from 'drag-drop'
 const mdns = require('multicast-dns')();
 const http = require('http');
 const network = require('network-address');
-const eos = require('end-of-stream');
 const JSONStream = require('JSONStream');
 const pump = require('pump');
 const rangeParser = require('range-parser');
@@ -104,6 +103,15 @@ const dispatchHandlers = {
   },
   'setModal': (value) => {
     state.modal = value;
+  },
+  'setLoadingTorrents': (value) => {
+    state.loadingTorrents = value;
+  },
+  'addLoadingTorrent': () => {
+    state.loadingTorrents += 1;
+  },
+  'subtractLoadingTorrent': () => {
+    state.loadingTorrents -= 1;
   },
   'exitModal': () => {
     state.modal = null;
