@@ -9,7 +9,6 @@ function getDefaultState () {
 
   return {
     repeating: false,
-    paused: true,
     playing: false,
     time: 0.0,
     totalTime: 0.0,
@@ -23,6 +22,7 @@ function getDefaultState () {
     },
     window: {
       title: 'Medio',
+      modal: null,
       fullscreen: false
     },
     prev: {
@@ -30,7 +30,6 @@ function getDefaultState () {
     },
     volume: 0.5,
     playbackRate: 1.0,
-    modal: null,
     location: new LocationHistory()
   };
 }

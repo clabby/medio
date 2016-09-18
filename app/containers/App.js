@@ -52,9 +52,9 @@ module.exports = class App extends Component {
 
   getModal () {
     const state = this.props.state;
-    if (!state.modal) return;
+    if (!state.window.modal) return;
 
-    const Modal = Modals[state.modal];
+    const Modal = Modals[state.window.modal];
 
     return (
       <Modal state={state} />

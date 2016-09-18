@@ -11,7 +11,7 @@ const pump = require('pump');
 const rangeParser = require('range-parser');
 const _ = require('lodash');
 
-import { ipcRenderer, remote, clipboard } from 'electron';
+import { remote, clipboard } from 'electron';
 const { dialog, Menu, MenuItem } = remote;
 
 import State from './lib/state';
@@ -102,7 +102,7 @@ const dispatchHandlers = {
     state.totalTime = value;
   },
   'setModal': (value) => {
-    state.modal = value;
+    state.window.modal = value;
   },
   'setLoadingTorrents': (value) => {
     state.loadingTorrents = value;
@@ -114,7 +114,7 @@ const dispatchHandlers = {
     state.loadingTorrents -= 1;
   },
   'exitModal': () => {
-    state.modal = null;
+    state.window.modal = null;
   },
   'openFileSelect': () => {
     let files = dialog.showOpenDialog({ properties: [ 'openFile', 'multiSelections' ]});
@@ -137,7 +137,7 @@ const dispatchHandlers = {
       });
     });
 
-    if (!state.modal) {
+    if (!state.window.modal) {
       dispatch('setModal', 'playlist-modal');
     }
   },
@@ -210,7 +210,6 @@ function update () {
 function updateElectron () {
   if (state.window.title !== state.prev.title) {
     state.prev.title = state.window.title;
-    ipcRenderer.send('setTitle', state.window.title);
   }
 }
 
