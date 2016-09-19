@@ -86,6 +86,12 @@ const dispatchHandlers = {
 
     state.playing = value;
   },
+  'setSnackBar': (value) => {
+    state.snackBar = value;
+  },
+  'removeSnackBar': () => {
+    state.snackBar = null;
+  },
   'changeVolume': (value) => {
     state.volume = value;
   },
@@ -123,12 +129,15 @@ const dispatchHandlers = {
     }
   },
   'addToPlaylist': (links) => {
+    let openModal = false;
+
     _.each(links, function (link) {
       Playlist.add(link, function (err, obj) {
         if (err) {
           return console.log(err);
         }
 
+        openModal = true;
         state.playlist.entries.push(obj);
 
         if (state.playlist.entries.length === 1) {
@@ -137,7 +146,7 @@ const dispatchHandlers = {
       });
     });
 
-    if (!state.window.modal) {
+    if (!state.window.modal && openModal) {
       dispatch('setModal', 'playlist-modal');
     }
   },

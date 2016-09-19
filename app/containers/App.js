@@ -7,6 +7,11 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+import _ from 'lodash';
+import { dispatch } from '../lib/dispatcher';
+
+import { Snackbar } from 'material-ui';
+
 darkBaseTheme.palette.primary1Color = colors.blue500;
 darkBaseTheme.palette.primary2Color = colors.blue500;
 darkBaseTheme.palette.primary3Color = colors.grey600;
@@ -33,6 +38,7 @@ module.exports = class App extends Component {
           {this.getHeader()}
           <div key='content' className='content'>{this.getView()}</div>
           {this.getModal()}
+          {this.getSnackBar()}
         </div>
       </MuiThemeProvider>
     );
@@ -59,6 +65,20 @@ module.exports = class App extends Component {
     return (
       <Modal state={state} />
     )
+  }
+
+  getSnackBar () {
+    const state = this.props.state;
+    if (!state.snackBar) return;
+
+    return (
+      <Snackbar
+        open={true}
+        message={state.snackBar}
+        autoHideDuration={2500}
+        onRequestClose={() => dispatch('removeSnackBar', state.snackBar)}
+      />
+    );
   }
 
   getView () {

@@ -25,6 +25,7 @@ function getDefaultState () {
       modal: null,
       fullscreen: false
     },
+    snackBar: null,
     prev: {
       title: null
     },

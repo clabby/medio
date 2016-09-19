@@ -157,6 +157,7 @@ var addFunctions = {
       file.name = path.basename(link);
       file.extension = file.name.split(".").pop().toLowerCase();
       if (!_.includes(allowedExtensions, file.extension)) {
+        dispatch('setSnackBar', 'Invalid file extension');
         console.log('Invalid file extension');
         return;
       }
@@ -178,6 +179,7 @@ var addFunctions = {
     file.name = link.lastIndexOf('/') > -1 ? link.split('/').pop() : link;
     file.extension = file.name.split(".").pop().toLowerCase();
     if (!_.includes(allowedExtensions, file.extension)) {
+      dispatch('setSnackBar', 'Invalid file extension.');
       console.log('Invalid file extension');
       return;
     }
