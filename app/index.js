@@ -10,6 +10,7 @@ const JSONStream = require('JSONStream');
 const pump = require('pump');
 const rangeParser = require('range-parser');
 const _ = require('lodash');
+const async = require('async');
 
 import { remote, clipboard } from 'electron';
 const { dialog, Menu, MenuItem } = remote;
@@ -113,6 +114,9 @@ const dispatchHandlers = {
   'setModal': (value) => {
     state.window.modal = value;
   },
+  'exitModal': () => {
+    state.window.modal = null;
+  },
   'setLoadingTorrents': (value) => {
     state.loadingTorrents = value;
   },
@@ -122,9 +126,6 @@ const dispatchHandlers = {
   'subtractLoadingTorrent': () => {
     state.loadingTorrents -= 1;
   },
-  'exitModal': () => {
-    state.window.modal = null;
-  },
   'openFileSelect': () => {
     let files = dialog.showOpenDialog({ properties: [ 'openFile', 'multiSelections' ]});
     if (files) {
@@ -132,26 +133,27 @@ const dispatchHandlers = {
     }
   },
   'addToPlaylist': (links) => {
-    let openModal = false;
+    let numFiles = 0;
 
-    _.each(links, function (link) {
+    async.each(links, function (link, next) {
       Playlist.add(link, function (err, obj) {
-        if (err) {
-          return console.log(err);
-        }
+        if (err) return next(err);
 
-        openModal = true;
+        numFiles++;
         state.playlist.entries.push(obj);
 
         if (state.playlist.entries.length === 1) {
           dispatch('select', obj);
         }
+        next();
       });
-    });
+    }, function (err) {
+      if (err) return console.log(err);
 
-    if (!state.window.modal && openModal) {
-      dispatch('setModal', 'playlist-modal');
-    }
+      if (numFiles > 0) {
+        dispatch('setSnackBar', 'Added ' + numFiles + ' file' + (numFiles > 1 ? 's' : '') + ' to your playlist.');
+      }
+    });
   },
   'deleteFromPlaylist': (id) => {
     if (state.playlist.selected.id === id) {

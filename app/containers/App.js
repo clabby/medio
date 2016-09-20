@@ -18,8 +18,6 @@ darkBaseTheme.palette.primary3Color = colors.grey600;
 darkBaseTheme.palette.accent1Color = colors.blueA200;
 darkBaseTheme.palette.accent2Color = colors.blueA400;
 darkBaseTheme.palette.accent3Color = colors.blueA100;
-darkBaseTheme.palette.textColor = colors.grey50;
-darkBaseTheme.palette.alternativeTextColor = colors.grey50;
 
 const Views = {
   'player': require('./pages/player/player')
@@ -77,7 +75,8 @@ module.exports = class App extends Component {
         open={true}
         message={state.snackBar}
         autoHideDuration={2500}
-        onRequestClose={() => dispatch('removeSnackBar', state.snackBar)}
+        onRequestClose={() => dispatch('removeSnackBar')}
+        style={{textAlign: 'center'}}
       />
     );
   }
