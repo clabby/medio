@@ -6,6 +6,10 @@ module.exports = Object.assign(new EventEmitter(), {
 
 function getDefaultState () {
   const LocationHistory = require('location-history');
+  const config = require('electron-json-config');
+
+  // Set Defaults
+  config.get('showTorrentProgress', true);
 
   return {
     repeating: false,
@@ -31,6 +35,7 @@ function getDefaultState () {
     },
     volume: 0.5,
     playbackRate: 1.0,
-    location: new LocationHistory()
+    location: new LocationHistory(),
+    settings: config
   };
 }

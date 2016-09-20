@@ -6,6 +6,8 @@ import { CircularProgress } from 'material-ui';
 import Tooltip from 'react-tooltip';
 import Timeline from '../../../components/timeline';
 
+import './player.scss';
+
 module.exports = class Player extends Component {
   componentDidUpdate () {
     const state = this.props.state;
@@ -83,6 +85,7 @@ module.exports = class Player extends Component {
           </div>
           <div className='controls-right'>
             <i className='icon' onClick={dispatcher('setModal', 'playlist-modal')}>playlist_play</i>
+            <i className='icon' onClick={dispatcher('setModal', 'settings-modal')}>settings</i>
             <i className='icon' onClick={dispatcher('fullscreen', !state.window.fullscreen)}>{state.window.fullscreen ? 'fullscreen_exit' : 'fullscreen'}</i>
           </div>
         </div>

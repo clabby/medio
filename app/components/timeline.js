@@ -24,6 +24,8 @@ module.exports = class Timeline extends React.Component {
   renderTimeline () {
     const state = this.props.state;
 
+    if (!state.settings.get('showTorrentProgress')) return;
+
     if (state.playlist.selected && state.playlist.selected.torrent) {
       const torrentSummary = util.getTorrentProgressSummary(state.playlist.selected.torrent);
       const fileProgress = torrentSummary.files[state.playlist.selected.torrentFileIndex];

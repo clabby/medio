@@ -70,6 +70,9 @@ document.addEventListener('mousemove', function() {
 }, false);
 
 const dispatchHandlers = {
+  'setSetting': (key, value) => {
+    state.settings.set(key, value);
+  },
   'setLoading': (value) => {
     state.loading = value;
   },

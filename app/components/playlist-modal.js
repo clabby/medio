@@ -43,6 +43,7 @@ module.exports = class PlaylistModal extends React.Component {
           primary={true}
           onTouchTap={() => dispatch('openFileSelect')}
           style={{display: 'block'}}
+          labelStyle={{color: '#fff'}}
         />
       )
     ];

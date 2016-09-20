@@ -26,7 +26,8 @@ const Views = {
 };
 
 const Modals = {
-  'playlist-modal': require('../components/playlist-modal')
+  'playlist-modal': require('../components/playlist-modal'),
+  'settings-modal': require('../components/settings-modal')
 };
 
 module.exports = class App extends Component {
