@@ -54,6 +54,7 @@ app.on('ready', async () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    app.quit();
   });
 
   if (process.env.NODE_ENV === 'development') {
