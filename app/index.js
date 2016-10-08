@@ -139,12 +139,16 @@ const dispatchHandlers = {
       Playlist.add(link, function (err, obj) {
         if (err) return next(err);
 
-        numFiles++;
-        state.playlist.entries.push(obj);
+        obj = [].concat(obj);
 
-        if (state.playlist.entries.length === 1) {
-          dispatch('select', obj);
-        }
+        _.each(obj, function (object) {
+          numFiles++;
+          state.playlist.entries.push(object);
+
+          if (state.playlist.entries.length === 1) {
+            dispatch('select', object);
+          }
+        });
         next();
       });
     }, function (err) {

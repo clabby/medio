@@ -25,7 +25,7 @@ module.exports = class PlaylistModal extends React.Component {
     } else {
       _.each(state.playlist.entries, function (entry) {
         entries.push(
-          <ListItem primaryText={entry.name} onClick={() => dispatch('select', entry)} key={entry.id} className={'playlist-entry ' + (state.playlist.selected.id === entry.id ? 'selected' : '')} rightIcon={<i className='icon' onClick={(e) => {
+          <ListItem primaryText={entry.name} onClick={() => dispatch('select', entry)} key={Math.random()} className={'playlist-entry ' + (state.playlist.selected.id === entry.id ? 'selected' : '')} rightIcon={<i className='icon' onClick={(e) => {
             e.stopPropagation();
             dispatch('deleteFromPlaylist', entry.id);
           }}>delete</i>} />
@@ -42,7 +42,7 @@ module.exports = class PlaylistModal extends React.Component {
           label='ADD FILE(S)'
           primary={true}
           onTouchTap={() => dispatch('openFileSelect')}
-          style={{display: 'block'}}
+          style={{display: 'block', padding: '5px'}}
           labelStyle={{color: '#fff'}}
         />
       )

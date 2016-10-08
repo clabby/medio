@@ -33,17 +33,17 @@ var addFunctions = {
       console.log('Torrent ready. Playlist ID: ' + id);
       dispatch('subtractLoadingTorrent');
 
-      torrent.files.forEach((f, index) => {
+      cb(null, _.map(torrent.files, function (f, index) {
         f.downloadSpeed = torrent.downloadSpeed;
         if (/\.(mp4|mkv|mp3)$/i.test(f.name)) {
           f.select();
-          f.id = id;
+          f.id = generateId();
           f.torrent = torrent;
           f.torrentFileIndex = index;
 
-          cb(null, f);
+          return f;
         }
-      });
+      }));
     });
   },
   onTorrent: (link, cb) => {
