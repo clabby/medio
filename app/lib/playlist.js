@@ -33,7 +33,8 @@ var addFunctions = {
       console.log('Torrent ready. Playlist ID: ' + id);
       dispatch('subtractLoadingTorrent');
 
-      cb(null, _.map(torrent.files, function (f, index) {
+      var torrents = [];
+      _.each(torrent.files, function (f, index) {
         f.downloadSpeed = torrent.downloadSpeed;
         if (/\.(mp4|mkv|mp3)$/i.test(f.name)) {
           f.select();
@@ -41,9 +42,10 @@ var addFunctions = {
           f.torrent = torrent;
           f.torrentFileIndex = index;
 
-          return f;
+          torrents.push(f);
         }
-      }));
+      });
+      cb(null, torrents);
     });
   },
   onTorrent: (link, cb) => {
@@ -177,12 +179,12 @@ var addFunctions = {
     var file = {};
 
     file.name = link.lastIndexOf('/') > -1 ? link.split('/').pop() : link;
-    file.extension = file.name.split(".").pop().toLowerCase();
+    /* file.extension = file.name.split(".").pop().toLowerCase();
     if (!_.includes(allowedExtensions, file.extension)) {
       dispatch('setSnackBar', 'Invalid file extension.');
       console.log('Invalid file extension');
       return;
-    }
+    } */
 
     file.createReadStream = (opts) => {
       if (!opts) {
@@ -231,7 +233,7 @@ function add (link, cb) {
   } else if (/youtube\.com\/watch|youtu.be/i.test(link)) {
     addFunctions.onYoutube(link, cb);
   } else if (/^https?:\/\//i.test(link)) {
-    addFunctions.onHttp(link, cb);
+    addFunctions.onHttpLink(link, cb);
   } else {
     addFunctions.onFile(link, cb);
   }

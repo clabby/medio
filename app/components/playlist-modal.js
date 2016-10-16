@@ -25,10 +25,12 @@ module.exports = class PlaylistModal extends React.Component {
     } else {
       _.each(state.playlist.entries, function (entry) {
         entries.push(
-          <ListItem primaryText={entry.name} onClick={() => dispatch('select', entry)} key={Math.random()} className={'playlist-entry ' + (state.playlist.selected.id === entry.id ? 'selected' : '')} rightIcon={<i className='icon' onClick={(e) => {
+          <ListItem onClick={() => dispatch('select', entry)} key={Math.random()} className={'playlist-entry ' + (state.playlist.selected.id === entry.id ? 'selected' : '')} rightIcon={<i className='icon' onClick={(e) => {
             e.stopPropagation();
             dispatch('deleteFromPlaylist', entry.id);
-          }}>delete</i>} />
+          }}>delete</i>}>
+            <div className='ellipsis'>{entry.name}</div>
+          </ListItem>
         );
       });
     }

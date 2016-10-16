@@ -18,7 +18,7 @@ module.exports = class Header extends React.Component {
       return (
         <span className='title'>
           Medio&nbsp;-&nbsp;
-          <span className='ellipsis'>{state.playlist.selected.name}</span>
+          <div className='ellipsis' style={{maxWidth: '350px'}}>{state.playlist.selected.name}</div>
           &nbsp;-&nbsp;
           {util.formatTime(state.time) + '/' + util.formatTime(state.totalTime)}
         </span>

@@ -38,6 +38,8 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({
     width: 860,
     height: 470,
+    minWidth: 860,
+    minHeight: 470,
     show: false,
     titleBarStyle: 'hidden-inset',
     icon: path.join(__dirname, '..', '..', 'assets', 'icon.png')
