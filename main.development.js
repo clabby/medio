@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell, protocol, powerSaveBlocker } from 'electron';
 import path from 'path';
 
 let menu;
@@ -51,6 +51,7 @@ app.on('ready', async () => {
     setTimeout(() => {
       mainWindow.show();
       mainWindow.focus();
+      powerSaveBlocker.start('prevent-display-sleep');
     }, 100);
   });
 

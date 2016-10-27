@@ -171,13 +171,13 @@ const dispatchHandlers = {
     state.playlist.selectedLink = 'http://127.0.0.1:' + server.address().port + '/' + selected.id;
     state.playing = true;
   },
+  'selectByIndex': (index) => {
+    dispatch('select', state.playlist.entries[index]);
+  },
   'selectNext': () => {
     let index = state.playlist.entries.indexOf(state.playlist.selected);
-    if (index + 1 >= state.playlist.entries.length) {
-      index = -1;
-    }
 
-    dispatch('select', state.playlist.entries[index + 1]);
+    dispatch('selectByIndex', index + 1 >= state.playlist.entries.length ? -1 : index + 1);
   },
   'setWindowTitle': (title) => {
     state.window.title = title;
